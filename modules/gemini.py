@@ -1,5 +1,4 @@
 import json
-
 import google.generativeai as genai
 
 apiKey = "AIzaSyBv715_eeUwnxY1RAUwCCVT8GHyUIp1RPQ"
@@ -56,23 +55,16 @@ model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
                                 system_instruction= prompt_parts
                               )
 
-#function parameter = input for getting json
-# response = model.generate_content("im feeling kinda lonely")
-# print(response.text)
-
-while True:
-    userMood = input("[+] -> ")
-    response = model.generate_content(userMood)
-
+def genJson(userInput:str):
+    # userMood = input("[+] -> ")
+    response = model.generate_content(userInput)
     response_json = json.loads(response.text)
     print("-------------------")
     print("Reponse JSON")
     print(response_json) #{'emotions': ['Lonely', 'Sad'], 'color': '#A4A4BF'}
     print("-------------------")
 
-    prompt_parts.append(f"input: {userMood},\noutput: {response_json},\n")
+    prompt_parts.append(f"input: {userInput},\noutput: {response_json},\n")
     color = response_json["color"]
-    
-    # Convert hex color to RGB values
-    rgb_values = tuple(int(color[i:i+2], 16) for i in (1, 3, 5))
-    print(rgb_values)
+
+    return response_json
