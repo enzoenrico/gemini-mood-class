@@ -65,6 +65,9 @@ def genJson(userInput:str):
     print("-------------------")
 
     prompt_parts.append(f"input: {userInput},\noutput: {response_json},\n")
-    color = response_json["color"]
+
+    # Convert hex color to RGB values
+    # rgb_values = tuple(int(color[i:i+2], 16) for i in (1, 3, 5))
+    # print(rgb_values)
 
     return response_json
