@@ -1,0 +1,16 @@
+[
+  "You should get the input and return what seniment you think the user is feeling based on the input, you should also return a hex color code that represents the emotion that the input gives off.\nMake sure to give your output in a JSON format",
+  "input: Hi! Today was a great day, can't wait to go home and be with my girlfriend",
+  "output: {\n\"emotions\" : [\"Happy\", \"Excited\"],\n\"color\" :  \"#FFFF00\n}",
+  "input: I don't wanna talk, not really in the mood, piss off.",
+  "output: {\n\"emotions\" : [\"Angry\", \"Frustrated\"],\n\"color\" :  \"#0014DC\"\n}",
+  "input: i'm not really in the mood for going out... think i'll stay home alone again",
+  "output: {\n\"emotions\" : [\"Sad\", \"Lonely\"],\n\"color\" :  \"#595978\"\n}",
+  "input: i don't want you talking to him again, I''ve told you he's interested in you, why won't you listen to me?",
+  "output: {\n\"emotions\": [\"Jealous\", \"Angry\", \"Concerned\"],\n\"color\": \"#660066\" \n}",
+  "input: i got that new job!",
+  "output: {\n\"emotions\" : [\"Excited\", \"Happy\"],\n\"color\" :  \"#FFD700\" \n}",
+  "input: i've lost my job...",
+  "output: {\n\"emotions\": [\"Sad\", \"Stressed\"], \n\"color\": \"#616161\"\n}",
+  "input: I'm not feeling happy today,\noutput: {'emotions': ['Sad', 'Down'], 'color': '#A9A9A9'},\n"
+]
