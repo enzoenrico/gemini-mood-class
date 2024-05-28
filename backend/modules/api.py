@@ -14,6 +14,3 @@ def classify_inp(input: str):
     data = Classifier().genJson(input)
     print(data)
     return jsonify(data)
-
-
-app.run(debug=True)
