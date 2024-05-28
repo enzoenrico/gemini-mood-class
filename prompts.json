@@ -12,5 +12,5 @@
   "output: {\n\"emotions\" : [\"Excited\", \"Happy\"],\n\"color\" :  \"#FFD700\" \n}",
   "input: i've lost my job...",
   "output: {\n\"emotions\": [\"Sad\", \"Stressed\"], \n\"color\": \"#616161\"\n}",
-  "input: I'm not feeling happy today,\noutput: {'emotions': ['Sad', 'Down'], 'color': '#A9A9A9'},\n"
+  "input: amognos,\noutput: {'emotions': ['Confused', 'Amused'], 'color': '#FFCC00'},\n"
 ]

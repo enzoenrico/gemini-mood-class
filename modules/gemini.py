@@ -49,19 +49,20 @@ class Classifier:
             system_instruction=self.prompt_parts,
         )
 
-    def updatePrompt(self, prompt: str) -> bool:
-      self.prompt_parts.append(prompt)
+    # def updatePrompt(self, prompt: str) -> bool:
+    #   self.prompt_parts.append(prompt)
 
-      with open("prompts.json", "w") as file:
-          json.dump(self.prompt_parts, file)
+    #   with open("prompts.json", "w") as file:
+    #       json.dump(self.prompt_parts, file)
 
-      with open("prompts.json", "r") as file:
-          self.prompt_parts = file.read()
-      print(self.prompt_parts)
-      return True
+    #   with open("prompts.json", "r") as file:
+    #       self.prompt_parts = file.read()
+    #   print(self.prompt_parts)
+    #   return True
 
     def genJson(self, userInput: str):
         response = self.model.generate_content(userInput)
         response_json = json.loads(response.text)
-        self.updatePrompt(f"input: {userInput},\noutput: {response_json},\n")
+        # self.updatePrompt(f"input: {userInput},\noutput: {response_json},\n")
+        self.prompt_parts.append(f"input: {userInput},\noutput: {response_json},\n")
         return response_json
