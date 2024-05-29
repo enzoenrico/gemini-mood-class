@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from gemini import Classifier
+import modules.classifier as classifier
 
 app = Flask(__name__)
 greetings = []
@@ -7,10 +7,11 @@ greetings = []
 
 @app.route("/classify/prompts", methods=["GET"])
 def get_prompts():
-    return jsonify(Classifier().prompt_parts)
+    return jsonify(classifier.Classifier().prompt_parts)
+
 
 @app.route("/classify/<input>")
 def classify_inp(input: str):
-    data = Classifier().genJson(input)
+    data = classifier.Classifier().genJson(input)
     print(data)
     return jsonify(data)
