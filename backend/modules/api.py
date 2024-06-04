@@ -13,5 +13,8 @@ def get_prompts():
 @app.route("/classify/<input>")
 def classify_inp(input: str):
     data = classifier.Classifier().genJson(input)
-    print(data)
-    return jsonify(data)
+    return (
+        jsonify(data),
+        200,
+        {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
+    )
