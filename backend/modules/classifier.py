@@ -65,4 +65,5 @@ class Classifier:
         response_json = json.loads(response.text)
         # self.updatePrompt(f"input: {userInput},\noutput: {response_json},\n")
         self.prompt_parts.append(f"input: {userInput},\noutput: {response_json},\n")
+
         return response_json
