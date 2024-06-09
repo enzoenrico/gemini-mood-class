@@ -18,3 +18,12 @@ def classify_inp(input: str):
         200,
         {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
     )
+
+
+@app.route("/classify/test")
+def return_test():
+    return (
+        jsonify({"emotions": ["Sad", "Stressed"], "color": "#616161"}),
+        200,
+        {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
+    )

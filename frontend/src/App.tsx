@@ -1,29 +1,30 @@
 import { useState } from "react";
+import react from "@vitejs/plugin-react-swc";
 
 function App() {
-  const [emotion, setEmotion] = useState("");
+  const [emotion, setEmotion] = useState(""); //temp emotion state
 
-  const [backlog, setBacklog] = useState<Array<string>>([]);
+  const [backlog, setBacklog] = useState<Array<string>>([]); //backlog of all emotions
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      console.log(emotion);
       setEmotion(emotion);
       setBacklog([...backlog, emotion]);
       e.currentTarget.value = "";
+      console.log(backlog);
       await callApi();
-      return;
     }
   };
 
-  const [apicallResult, setApiResult] = useState<Array<string>>([]);
-  const [colorRecieved, setColor] = useState<string>("");
+  const [apicallResult, setApiResult] = useState<Array<string>>([]); //has all api returns in it's full format
+  const [currResponse, setCurrResponse] = useState<string>(""); //current response from api
 
   const callApi = async () => {
-    const response = await fetch("http://localhost:5000/classify/" + emotion);
+    // const response = await fetch("http://localhost:5000/classify/" + emotion);
+    const response = await fetch("http://localhost:5000/classify/test");
     const data = await response.json();
-    setApiResult(data.emotions);
-    setColor(data.color);
+    setCurrResponse(data);
+    setApiResult([...apicallResult, currResponse]);
   };
 
   return (
@@ -39,28 +40,22 @@ function App() {
           <div className="flex flex-1 flex-col justify-start overflow-y-auto">
             <div className="px-10 grid grid-cols-3 gap-4 ">
               {backlog.map((emotion, index) => (
-                <div key={index}>
-                  <div
-                    className="p-2 px-3 m-2 rounded-full bg-neutral-900 text-white text-center break-words"
-                    style={
-                      // add color element here with js
-                      { maxWidth: "100%" }
-                    }
-                  >
-                    <p>{emotion}</p>
-                    <div className="flex flex-row items-center justify-center gap-1">
-                      {apicallResult.map((e, index) => (
-                        <h3
-                          className="w-fit rounded-full px-2"
-                          key={index}
-                          style={{ backgroundColor: colorRecieved }}
-                        >
-                          {e}
-                        </h3>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                // <div key={index}>
+                //   <div
+                //     className="p-2 px-3 m-2 rounded-full bg-neutral-900 text-white text-center break-words"
+                //     style={
+                //       // add color element here with js
+                //       { maxWidth: "100%" }
+                //     }
+                //   >
+                //     <p>{emotion}</p>
+                //     <div className="flex flex-row items-center justify-center gap-1">
+                //       <h3 className="px-2 bg-blue-950 rounded-xl">amognos</h3>
+                //     </div>
+                //   </div>
+                // </div>
+
+                
               ))}
             </div>
           </div>
