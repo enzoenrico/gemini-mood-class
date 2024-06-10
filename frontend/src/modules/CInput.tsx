@@ -6,14 +6,14 @@ const CInput = ({
   apicallResult,
   setApiResult,
 }) => {
-  //   const apiPath = "http://localhost:5000/classify/"+emotion;
+    // const apiPath = "http://localhost:5000/classify/"+emotion;
   const apiPath = "http://localhost:5000/classify/test";
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && e.currentTarget.value !== "") {
       setEmotion(e.currentTarget.value);
       e.currentTarget.value = "";
-      setBacklog([...backlog, emotion]);
+      setBacklog([emotion, ...backlog]);
       //   console.log(backlog);
       await callApi();
     }

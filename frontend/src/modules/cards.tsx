@@ -17,14 +17,16 @@ const Cards = ({
 
   return (
     <div
-      className={`flex flex-col items-center justify-center px-2 py-1 bg-neutral-900 text-white rounded-md max-w-xs`}
+      className={`flex flex-col items-center justify-center px-2 py-1 bg-neutral-900 text-white rounded-md max-w-xs sm:w-full`}
     >
       {emotion}
-      <div className="lg:flex lg:flex-row lg:justify-evenly gap-2 sm:flex-col">
+      <div className="flex md:flex-row flex-col gap-2">
         {apiResult.map((apiEmotion, index) => (
           <div
             key={index}
-            className={`px-2 rounded-md w-fit sm:w-max my-2 ${isLightColor() ? "text-black" : "text-white"}`}
+            className={`px-2 rounded-md md:w-fit w-full my-2 ${
+              isLightColor() ? "text-black" : "text-white"
+            }`}
             style={{ backgroundColor: color }}
           >
             {apiEmotion}
