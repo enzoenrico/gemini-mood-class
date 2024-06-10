@@ -24,7 +24,7 @@ const Cards = ({
         {apiResult.map((apiEmotion, index) => (
           <div
             key={index}
-            className={`px-2 rounded-md md:w-fit w-full my-2 ${
+            className={`px-2 rounded-md md:w-fit w-full my-2 transition-all ${
               isLightColor() ? "text-black" : "text-white"
             }`}
             style={{ backgroundColor: color }}
