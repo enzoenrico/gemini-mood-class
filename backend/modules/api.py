@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+import random
 import modules.classifier as classifier
 
 app = Flask(__name__)
@@ -22,8 +23,10 @@ def classify_inp(input: str):
 
 @app.route("/classify/test")
 def return_test():
+    emotionArr = random.choice([["Happy", "Excited"], ["Sad", "Stressed"]])
+    color = random.choice(["#FFD700", "#FF0000"])
     return (
-        jsonify({"emotions": ["Sad", "Stressed"], "color": "#616161"}),
+        jsonify({"emotions": emotionArr, "color":color}),
         200,
         {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
     )

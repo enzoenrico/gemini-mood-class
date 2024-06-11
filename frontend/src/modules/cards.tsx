@@ -14,13 +14,14 @@ const Cards = ({
     const brightness = (r * 299 + g * 587 + b * 114) / 1000;
     return brightness > 155;
   };
+  const currentDate = new Date().toLocaleDateString();
 
   return (
     <div
       className={`flex flex-col items-center justify-center px-2 py-1 bg-neutral-900 text-white rounded-md max-w-xs sm:w-full`}
     >
       {emotion}
-      <div className="flex md:flex-row flex-col gap-2">
+      <div className="flex md:flex-row flex-col md:gap-2">
         {apiResult.map((apiEmotion, index) => (
           <div
             key={index}
@@ -33,6 +34,7 @@ const Cards = ({
           </div>
         ))}
       </div>
+      <div className="font-thin text-slate-100">{currentDate}</div>
     </div>
   );
 };
