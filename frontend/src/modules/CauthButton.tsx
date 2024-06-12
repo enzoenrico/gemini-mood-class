@@ -20,7 +20,7 @@ const AuthButton = () => {
       const provider = new GoogleAuthProvider();
       signInWithPopup(auth, provider)
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           setUser(result.user?.displayName);
           localStorage.setItem(
             "user-emotion-thingy",

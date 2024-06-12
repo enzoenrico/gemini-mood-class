@@ -25,32 +25,28 @@ const CInput: React.FC<CInputProps> = ({
       setEmotion(e.currentTarget.value);
       e.currentTarget.value = "";
       setBacklog([emotion, ...backlog]);
-      await callApi();
-      console.log(await createParams());
-      send();
+      const data = await callApi();
+      const createdParams = await createParams(data);
+      storeEmotion(createdParams);
     }
   };
 
-  const callApi = async () => {
+  const callApi = async (): apicallResult => {
     const response = await fetch(apiPath);
-    const data = await response.json();
+    const data: apicallResult = await response.json();
     setApiResult([...apicallResult, data]);
+    console.log(data);
+    return data;
   };
 
-  const createParams = async() => {
-    const color = await apicallResult[apicallResult.length - 1]?.color;
-
-    const emotions = await apicallResult[apicallResult.length - 1]?.emotions;
+  const createParams = async (apiThing: apicallResult) => {
+    const color = apiThing.color;
+    const emotions = apiThing.emotions;
     const request = emotion;
     const time = new Date();
     const user = "user";
     return { color, emotions, request, time, user };
   };
-
-  const send = async () =>{
-    const params = await createParams();
-    await storeEmotion(params);
-  }
 
   return (
     <input
