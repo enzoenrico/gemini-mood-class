@@ -1,4 +1,14 @@
-const CInput = ({
+type apicallResult = { color: string; emotions: string[] };
+type CInputProps = {
+  setEmotion: (emotion: string) => void;
+  emotion: string;
+  setBacklog: (backlog: string[]) => void;
+  backlog: string[];
+  apicallResult: apicallResult[];
+  setApiResult: (apiResult: apicallResult[]) => void;
+};
+
+const CInput: React.FC<CInputProps> = ({
   setEmotion,
   emotion,
   setBacklog,
@@ -7,14 +17,12 @@ const CInput = ({
   setApiResult,
 }) => {
   const apiPath = "http://localhost:5000/classify/" + emotion;
-  // const apiPath = "http://localhost:5000/classify/test";
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && e.currentTarget.value !== "") {
       setEmotion(e.currentTarget.value);
       e.currentTarget.value = "";
       setBacklog([emotion, ...backlog]);
-      //   console.log(backlog);
       await callApi();
     }
   };
@@ -38,3 +46,4 @@ const CInput = ({
 };
 
 export default CInput;
+

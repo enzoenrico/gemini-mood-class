@@ -18,7 +18,7 @@ const Cards = ({
 
   return (
     <div
-      className={`flex flex-col items-center justify-center px-2 py-1 bg-neutral-900 text-white rounded-md max-w-xs sm:w-full`}
+      className={`flex flex-col items-center justify-center px-2 py-1 bg-neutral-900 text-white rounded-md max-w-xs sm:w-full h-fit text-wrap`}
     >
       {emotion}
       <div className="flex md:flex-row flex-col md:gap-2">
