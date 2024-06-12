@@ -1,3 +1,5 @@
+import { storeEmotion } from "./storer";
+
 type apicallResult = { color: string; emotions: string[] };
 type CInputProps = {
   setEmotion: (emotion: string) => void;
@@ -24,6 +26,8 @@ const CInput: React.FC<CInputProps> = ({
       e.currentTarget.value = "";
       setBacklog([emotion, ...backlog]);
       await callApi();
+      console.log(await createParams());
+      send();
     }
   };
 
@@ -32,6 +36,21 @@ const CInput: React.FC<CInputProps> = ({
     const data = await response.json();
     setApiResult([...apicallResult, data]);
   };
+
+  const createParams = async() => {
+    const color = await apicallResult[apicallResult.length - 1]?.color;
+
+    const emotions = await apicallResult[apicallResult.length - 1]?.emotions;
+    const request = emotion;
+    const time = new Date();
+    const user = "user";
+    return { color, emotions, request, time, user };
+  };
+
+  const send = async () =>{
+    const params = await createParams();
+    await storeEmotion(params);
+  }
 
   return (
     <input
@@ -46,4 +65,3 @@ const CInput: React.FC<CInputProps> = ({
 };
 
 export default CInput;
-
