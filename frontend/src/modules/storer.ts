@@ -1,4 +1,4 @@
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import app from "./firebase";
 
 const db = getFirestore(app);
@@ -28,4 +28,13 @@ export const storeEmotion = async ({
   } catch (e) {
     console.error("Error adding document: ", e);
   }
+};
+
+export const getEmotions = async () => {
+  const emotions = [];
+  const querySnapshot = await getDocs(collection(db, "user-emotions"));
+  querySnapshot.forEach((doc) => {
+    emotions.push(doc.data());
+  });
+  return emotions;
 };

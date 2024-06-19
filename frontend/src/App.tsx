@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import react from "@vitejs/plugin-react-swc";
 import Cards from "./modules/cards";
 import CInput from "./modules/CInput";
 import AuthButton from "./modules/CauthButton";
+import { getEmotions } from "./modules/storer";
 
 function App() {
   const [emotion, setEmotion] = useState<string>(""); //temp emotion state
@@ -10,6 +11,18 @@ function App() {
   const [apicallResult, setApiResult] = useState<
     Array<{ color: string; emotions: string[] }>
   >([]); //has all api returns in its full format
+
+  useEffect(() => {
+    getEmotions().then((res) => {
+      setBacklog(res.map((emotion) => emotion.request));
+      setApiResult(
+        res.map((emotion) => {
+          return { color: emotion.color, emotions: emotion.emotions };
+        })
+      );
+    });
+  });
+
   return (
     <>
       <div className="w-screen h-screen bg-neutral-900 flex items-center justify-center">
@@ -42,7 +55,8 @@ function App() {
                       apicallResult[index]
                         ? apicallResult[index].emotions
                         : ["NO DATA"]
-                    }
+                    },
+                    dateOfCreation={apicallResult[index].}
                   />
                 );
               })}

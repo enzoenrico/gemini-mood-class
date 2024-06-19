@@ -2,6 +2,7 @@ const Cards = ({
   emotion,
   color,
   apiResult,
+  dateOfCreation,
 }: {
   emotion: string;
   color: string;
@@ -14,7 +15,7 @@ const Cards = ({
     const brightness = (r * 299 + g * 587 + b * 114) / 1000;
     return brightness > 155;
   };
-  const currentDate = new Date().toLocaleDateString();
+  // const currentDate = new Date().toLocaleDateString();
 
   return (
     <div
@@ -34,7 +35,7 @@ const Cards = ({
           </div>
         ))}
       </div>
-      <div className="font-thin text-slate-100">{currentDate}</div>
+      <div className="font-thin text-slate-100">{dateOfCreation}</div>
     </div>
   );
 };
