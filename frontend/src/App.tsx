@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-// import react from "@vitejs/plugin-react-swc";
 import Cards from "./modules/cards";
 import CInput from "./modules/CInput";
 import AuthButton from "./modules/CauthButton";
 import { getEmotions } from "./modules/storer";
+import { getAll } from "firebase/remote-config";
 
 function App() {
   const [emotion, setEmotion] = useState<string>(""); //temp emotion state
@@ -12,16 +12,25 @@ function App() {
     Array<{ color: string; emotions: string[] }>
   >([]); //has all api returns in its full format
 
-  useEffect(() => {
-    getEmotions().then((res) => {
-      setBacklog(res.map((emotion) => emotion.request));
-      setApiResult(
-        res.map((emotion) => {
-          return { color: emotion.color, emotions: emotion.emotions };
-        })
-      );
-    });
-  });
+  const getAllDataFromFirestore = () => {
+    const data = getEmotions();
+    if (typeof data === "Array") {
+      data.then((res) => {
+        setBacklog(res.map((emotion) => emotion.request));
+        setApiResult(
+          res.map((emotion) => {
+            return { color: emotion.color, emotions: emotion.emotions };
+          })
+        );
+      });
+    }else{
+    data.then((res)=>{
+      console.log("Error getting data: \n")
+      console.log(res)
+    })
+    }
+
+  };
 
   return (
     <>
@@ -55,8 +64,12 @@ function App() {
                       apicallResult[index]
                         ? apicallResult[index].emotions
                         : ["NO DATA"]
-                    },
-                    dateOfCreation={apicallResult[index].}
+                    }
+                    dateOfCreation={
+                      apicallResult[index]
+                        ? apicallResult[index].time
+                        : "NO DATA"
+                    }
                   />
                 );
               })}
@@ -71,6 +84,12 @@ function App() {
               setBacklog={setBacklog}
               emotion={emotion}
             />
+            <button
+              className="rounded-md bg-blue-400 px-2 border border-blue-500 h-2/4 text-white"
+              onClick={getAllDataFromFirestore}
+            >
+              Refresh
+            </button>
           </div>
         </div>
       </div>

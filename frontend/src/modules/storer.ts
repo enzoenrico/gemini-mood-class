@@ -30,11 +30,16 @@ export const storeEmotion = async ({
   }
 };
 
-export const getEmotions = async () => {
+export const getEmotions = async (): Promise<Array | firestore.FirestoreError> => {
   const emotions = [];
-  const querySnapshot = await getDocs(collection(db, "user-emotions"));
-  querySnapshot.forEach((doc) => {
-    emotions.push(doc.data());
-  });
-  return emotions;
+  try {
+    const querySnapshot = await getDocs(collection(db, "user-emotions"));
+    querySnapshot.forEach((doc) => {
+      emotions.push(doc.data());
+    });
+    return emotions;
+  } catch (e: firestore.FirestoreError) {
+    console.error("Error getting documents: ", e);
+    return e;
+  }
 };
