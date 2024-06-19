@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Cards from "./modules/cards";
 import CInput from "./modules/CInput";
 import AuthButton from "./modules/CauthButton";
 import { getEmotions } from "./modules/storer";
-import { getAll } from "firebase/remote-config";
 
 function App() {
   const [emotion, setEmotion] = useState<string>(""); //temp emotion state
@@ -14,7 +13,7 @@ function App() {
 
   const getAllDataFromFirestore = () => {
     const data = getEmotions();
-    if (typeof data === "Array") {
+    if (typeof data === typeof Array) {
       data.then((res) => {
         setBacklog(res.map((emotion) => emotion.request));
         setApiResult(
@@ -23,13 +22,12 @@ function App() {
           })
         );
       });
-    }else{
-    data.then((res)=>{
-      console.log("Error getting data: \n")
-      console.log(res)
-    })
+    } else {
+      data.then((res) => {
+        console.log("Error getting data: \n");
+        console.log(res);
+      });
     }
-
   };
 
   return (
@@ -40,7 +38,7 @@ function App() {
           className="w-5/6 h-5/6 rounded-md bg-neutral-800  flex flex-col justify-between"
         >
           <div className="flex items-start p-2 justify-between">
-            <h2 className="text-4xl text-neutral-100 font-bold text-wrap w-2/5 p-10">
+            <h2 className="text-4xl text-neutral-100 font-bold text-wrap w-2/5 px-5">
               How are you feeling today?
             </h2>
             <AuthButton />
@@ -75,7 +73,7 @@ function App() {
               })}
             </div>
           </div>
-          <div className="flex w-full items-center justify-center">
+          <div className="flex w-full items-center justify-evenly">
             <CInput
               setEmotion={setEmotion}
               apicallResult={apicallResult}
