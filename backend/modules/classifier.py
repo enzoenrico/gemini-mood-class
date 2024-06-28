@@ -1,11 +1,15 @@
 import json
+from dotenv import load_dotenv
 import google.generativeai as genai
+import os
 
+load_dotenv("../.env")
+api_key = os.environ.get("API_KEY")
 
 class Classifier:
     def __init__(self) -> None:
         self.promptFile = "prompt.json"
-        self.apiKey = "AIzaSyBv715_eeUwnxY1RAUwCCVT8GHyUIp1RPQ"
+        self.apiKey = api_key
         genai.configure(api_key=self.apiKey)
         self.generation_config = {
             "temperature": 1,
